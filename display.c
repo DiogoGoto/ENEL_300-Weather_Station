@@ -61,47 +61,71 @@ void displayNumber( const uint8_t *digits, int mode){
                 PORTA.OUT = CLEAR;
             }
     
-        if(mode == 1){
-            switch(i){
-                case 0:
-                    PORTD.OUT &= D1;
-                    _delay_us(400);
-                    break;
-                case 1:
-                    PORTD.OUT &= D2;
-                    _delay_us(400);
-                    break;
-                case 2:
-                    PORTD.OUT &= D3;
-                    PORTA.OUT = DP(PORTA.OUT);
-                    _delay_us(400);
-                    break;
-                case 3:
-                    PORTD.OUT &= D4;
-                    _delay_us(400);
-                    break;
-            }
-        }
-        else{
-            switch(i){
-                case 1:
-                    PORTD.OUT &= D1;
-                    _delay_us(400);
-                    break;
-                case 2:
-                    PORTD.OUT &= D2;
-                    PORTA.OUT = DP(PORTA.OUT);
-                    _delay_us(400);
-                    break;
-                case 3:
-                    PORTD.OUT &= D3;
-                    _delay_us(400);
-                    break;
-                case 0:
-                    PORTD.OUT &= D4;
-                    _delay_us(400);
-                    break;
-            }
+        switch(mode){
+            case 0:
+                switch(i){
+                    case 0:
+                        PORTA.OUT = CHAR_H;
+                        PORTD.OUT &= D1;
+                        _delay_us(400);
+                        break;
+                    case 1:
+                        PORTD.OUT &= D2;
+                        _delay_us(400);
+                        break;
+                    case 2:
+                        PORTD.OUT &= D3;
+                        PORTA.OUT = DP(PORTA.OUT);
+                        _delay_us(400);
+                        break;
+                    case 3:
+                        PORTD.OUT &= D4;
+                        _delay_us(400);
+                        break;
+                }
+                break;
+            case 1:
+                switch(i){
+                    case 1:
+                        PORTD.OUT &= D1;
+                        _delay_us(400);
+                        break;
+                    case 2:
+                        PORTD.OUT &= D2;
+                        PORTA.OUT = DP(PORTA.OUT);
+                        _delay_us(400);
+                        break;
+                    case 3:
+                        PORTD.OUT &= D3;
+                        _delay_us(400);
+                        break;
+                    case 0:
+                        PORTA.OUT = CHAR_C;
+                        PORTD.OUT &= D4;
+                        _delay_us(400);
+                        break;
+                }
+                break;
+            case 2:
+                switch(i){
+                    case 0:
+                        PORTA.OUT = CHAR_U;
+                        PORTD.OUT &= D1;
+                        _delay_us(400);
+                        break;
+                    case 1:
+                        PORTD.OUT &= D2;
+                        _delay_us(400);
+                        break;
+                    case 2:
+                        PORTD.OUT &= D3;
+                        _delay_us(400);
+                        break;
+                    case 3:
+                        PORTD.OUT &= D4;
+                        _delay_us(400);
+                        break;
+                }
         }                 
     }
 }

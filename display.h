@@ -26,6 +26,7 @@
 
 #define CHAR_C 0x39
 #define CHAR_H 0x76 
+#define CHAR_U 0x3e
 
 #define ALLOFF (0x1f) // HIGH to all Digit PIn
 #define D1 ~(0x02)
