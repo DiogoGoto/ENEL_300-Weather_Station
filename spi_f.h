@@ -1,12 +1,10 @@
 /*
- * File:   SPI_f.h
+ * File:   SPI_funcs.h
  * Author: diogo
  *
  * Created on 5 de Abril de 2024, 08:20
  */
 
-#ifndef SPI_F_H
-#define SPI_F_H
 #include <avr/io.h>
 
 void SPI_init(uint8_t master); 
@@ -30,4 +28,3 @@ uint8_t SPI_transmit(uint8_t data_send, uint8_t *data_received);
  * Returns a 1 if successfully send
  * Return a 0 if  failed (SPI is busy)
  */
-#endif

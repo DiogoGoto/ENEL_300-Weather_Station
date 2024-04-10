@@ -1,5 +1,5 @@
 /*
- * File:   SPI_f.c
+ * File:   SPI_funcs.c
  * Author: diogo
  *
  * Created on 5 de Abril de 2024, 08:19
@@ -67,32 +67,16 @@ void SPI_init(uint8_t master){
 }
 
 uint8_t SPI_transmit(uint8_t data_send, uint8_t *data_received){
-    if(SPI1.CTRLA & 0x2){ //if in master mode
-        if(SPI1.INTFLAGS & 0x80){ // Checks for completed send/receive operation
-                                      //Reading a 1 Clears the Flag
-            PORTC.OUT &= ~0x8; // set SS to LOW starting communication
-            SPI1.DATA = data_send; //Write the Data to be sent to the register
-            _delay_us(30); //Wait for Transmit to be completed
-
-            SPI1.DATA = 0; //send dummy data so that the device can send the data from the firt request
-            _delay_us(30) ;
-            *data_received = SPI1.DATA; // Saves whatever data was sent by the Slave
-            PORTC.OUT |= 0x8; // set SS to HIGH ending communication
-            //_delay_us(500); //TEST W/O
-            return 1;
-          }
-        else
-            return 0;
-    }
-    else{ // in slave mode
-        if(SPI1.INTFLAGS & 0x80){ // if received transfer // flag clears itself when empty
-            *data_received = SPI1.DATA;
-        }
-        if(SPI1.INTFLAGS & 0x40){ // check if the transmit data register is empty
-            SPI1.DATA = data_send;
-            SPI1.INTFLAGS |= 0x40; // clears  the flag
-        }
+    if(SPI1.INTFLAGS & 0x80){ // Checks for completed send/receive operation
+                                  //Reading a 1 Clears the Flag
+        PORTC.OUT &= ~0x8; // set SS to LOW starting communication
+        SPI1.DATA = data_send; //Write the Data to be sent to the register
+        _delay_us(30); //Wait for Transmit to be completed
+        *data_received = SPI1.DATA; // Saves whatever data was sent by the Slave
+        PORTC.OUT |= 0x8; // set SS to HIGH ending communication
+        _delay_us(500); //TEST W/O
         return 1;
-    }
-    return 0;
+      }
+    else
+        return 0;
 }
